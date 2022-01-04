@@ -1,0 +1,2 @@
+2022/01/04-15:03:32.440 4660 Creating DB C:\projects\web-archiver-cloud-function\functions\data\Default\Sync Data\LevelDB since it was missing.
+2022/01/04-15:03:32.552 4660 Reusing MANIFEST C:\projects\web-archiver-cloud-function\functions\data\Default\Sync Data\LevelDB/MANIFEST-000001

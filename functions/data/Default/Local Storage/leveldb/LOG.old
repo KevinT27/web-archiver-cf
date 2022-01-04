@@ -1,0 +1,15 @@
+2022/01/04-15:37:26.125 6db4 Reusing MANIFEST C:\projects\web-archiver-cloud-function\functions\data\Default\Local Storage\leveldb/MANIFEST-000001
+2022/01/04-15:37:26.134 6db4 Recovering log #20
+2022/01/04-15:37:26.135 6db4 Reusing old log C:\projects\web-archiver-cloud-function\functions\data\Default\Local Storage\leveldb/000020.log 
+2022/01/04-15:37:32.662 66c4 Level-0 table #24: started
+2022/01/04-15:37:34.910 66c4 Level-0 table #24: 17512 bytes OK
+2022/01/04-15:37:34.912 66c4 Delete type=0 #20
+2022/01/04-15:37:34.913 66c4 Compacting 4@0 + 1@1 files
+2022/01/04-15:37:37.069 66c4 Generated table #25@0: 163 keys, 108543 bytes
+2022/01/04-15:37:37.069 66c4 Compacted 4@0 + 1@1 files => 108543 bytes
+2022/01/04-15:37:37.070 66c4 compacted to: files[ 0 1 0 0 0 0 0 ]
+2022/01/04-15:37:37.071 66c4 Delete type=2 #12
+2022/01/04-15:37:37.071 66c4 Delete type=2 #14
+2022/01/04-15:37:37.071 66c4 Delete type=2 #18
+2022/01/04-15:37:37.071 66c4 Delete type=2 #21
+2022/01/04-15:37:37.071 66c4 Delete type=2 #24
