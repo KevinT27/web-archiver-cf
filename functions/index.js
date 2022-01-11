@@ -3,9 +3,7 @@ const functions = require("firebase-functions");
 const scraper = require("./scraper");
 
 // The Firebase Admin SDK to access Firestore.
-// Added comment
 const admin = require('firebase-admin');
-const { firebaseConfig } = require("firebase-functions");
 admin.initializeApp();
 
 const elementsToScrap = [

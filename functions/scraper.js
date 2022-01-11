@@ -6,9 +6,7 @@ function scrapNews(elementsToScrap) {
     return new Promise(async (resolve, reject) => {
         const scrappedElements = [];
         try {
-            const browser = await puppeteer.launch({
-                userDataDir: "./data"
-            });
+            const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-setuid-sandbox'] });
             for (const el of elementsToScrap) {
                 const page = await browser.newPage();
 
