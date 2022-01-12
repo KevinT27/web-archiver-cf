@@ -31,46 +31,16 @@ const elementsToScrap = [
     },
 ];
 
-exports.scrapNews = functions.https.onRequest(async (req, res) => {
+exports.scheduledFunction = functions.runWith({timeoutSeconds: 360}).pubsub.schedule('every 15 minutes').onRun(async (context) => {
     const addedNews = [];
+    const scrappedElements = [];
 
     // scrap elements
-    const scrappedElements = await scraper.scrapNews(elementsToScrap)
-
-    for (element of scrappedElements) {
-        // get current elements from firestore.
-        let news = admin.firestore().collectionGroup("news").where("header", "==", element.header);
-
-        let existsYN = false;
-
-        // check if item with the same header already exists.
-        existsYN = await news.get().then((querySnapshot) => {
-            return !querySnapshot.empty
-        })
-
-        if (existsYN) continue;
-
-        // Push the news into Firestore using the Firebase Admin SDK.
-        // add timestamp
-        const newItem = await admin.firestore().collection('news').add({
-            ...element, date: admin.firestore.FieldValue.serverTimestamp()
-        });
-
-
-        // add to addedNews array
-        addedNews.push({ id: newItem.id, date: new Date() })
+    for (element of elementsToScrap) {
+        let scrappedElement = await scraper.scrapNews(element);
+        scrappedElement && scrappedElements.push(scrappedElement);
     }
 
-    // Send back a message that we've successfully written the message
-    res.json({ result: addedNews });
-});
-
-exports.scheduledFunction = functions.pubsub.schedule('every 15 minutes').onRun(async (context) => {
-    const addedNews = [];
-
-    // scrap elements
-    const scrappedElements = await scraper.scrapNews(elementsToScrap)
-
     for (element of scrappedElements) {
 
         // get current elements from firestore.
@@ -78,7 +48,7 @@ exports.scheduledFunction = functions.pubsub.schedule('every 15 minutes').onRun(
 
         // check if item with the same header already exists.
         let existsYN = false;
-  
+
         existsYN = await news.get().then((querySnapshot) => {
             return !querySnapshot.empty
         })
@@ -89,7 +59,7 @@ exports.scheduledFunction = functions.pubsub.schedule('every 15 minutes').onRun(
         // Push the news into Firestore using the Firebase Admin SDK.
         // add timestamp
         const newItem = await admin.firestore().collection('news').add({
-            ...element, date: admin.firestore.FieldValue.serverTimestamp()
+            ...element, date: admin.firestore.FieldValue.serverTimestamp(), 
         });
 
         // add to addedNews array
